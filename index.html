@@ -467,6 +467,7 @@
             cursor: pointer;
             opacity: 0.95;
             z-index: 1;
+            transition: opacity 0.25s ease;
         }
 
         .scroll-hint .mouse {
@@ -1050,6 +1051,7 @@
         const splash = $('splash-overlay'), vidBox = $('video-container'), vid = $('opening-video'),
             content = $('main-content'), music = $('bg-music'), audioBtn = $('audio-toggle'),
             bars = $('music-bars'), startBtn = $('start-btn'), petals = $('petals-container');
+        const scrollHint = document.querySelector('.scroll-hint');
 
         // Petals
         function makePetal() { const p = document.createElement('div'); p.classList.add('petal'); const s = Math.random() * 12 + 8 + 'px'; p.style.width = s; p.style.height = s; p.style.left = Math.random() * 100 + 'vw'; p.style.animationDuration = Math.random() * 5 + 6 + 's'; p.style.opacity = Math.random() * 0.3 + 0.1; petals.appendChild(p); setTimeout(() => p.remove(), 11000) }
@@ -1100,6 +1102,17 @@
             langBtn.textContent = isAr ? 'EN' : 'ع'; 
             document.querySelectorAll('[data-ar]').forEach(el => { el.textContent = isAr ? el.dataset.ar : el.dataset.en }) 
         };
+
+        function updateScrollHint() {
+            if (!scrollHint) return;
+            const show = window.scrollY < 50;
+            scrollHint.style.opacity = show ? '0.95' : '0';
+            scrollHint.style.pointerEvents = show ? 'auto' : 'none';
+        }
+
+        window.addEventListener('scroll', updateScrollHint);
+        window.addEventListener('resize', updateScrollHint);
+        updateScrollHint();
 
         // Scroll Animation
         const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }) }, { threshold: 0.12 });
