@@ -1012,7 +1012,17 @@
         const showMainContent = () => { vidBox.style.opacity = '0'; setTimeout(() => { vidBox.style.display = 'none'; content.style.display = 'block'; setTimeout(() => content.style.opacity = '1', 100) }, 1000) };
         vid.onended = showMainContent;
         const skipBtn = $('skip-btn');
-        if (skipBtn) skipBtn.onclick = () => { vid.pause(); showMainContent(); };
+        const skipAction = () => { vid.pause(); showMainContent(); };
+        let videoClickCount = 0;
+
+        if (skipBtn) skipBtn.onclick = skipAction;
+        if (vid) vid.onclick = () => {
+            videoClickCount += 1;
+            if (videoClickCount >= 5) {
+                skipAction();
+                videoClickCount = 0;
+            }
+        };
 
         // Helper for button click animation
         function triggerClickAnimation(btn) {
