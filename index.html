@@ -400,7 +400,8 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 2rem
+            padding: 2rem;
+            position: relative;
         }
 
         .hero-rings {
@@ -449,6 +450,49 @@
             font-family: var(--font-en);
             font-weight: 300;
             letter-spacing: 6px
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-family: var(--font-en);
+            cursor: pointer;
+            opacity: 0.95;
+            z-index: 1;
+        }
+
+        .scroll-hint .mouse {
+            width: 32px;
+            height: 52px;
+            border: 2px solid var(--accent-gold);
+            border-radius: 18px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            padding-top: 8px;
+        }
+
+        .scroll-hint .mouse::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            animation: scrollDot 1.5s infinite;
+        }
+
+        @keyframes scrollDot {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(12px); opacity: 0.35; }
+            100% { transform: translateY(0); opacity: 1; }
         }
 
         /* Cards */
@@ -862,6 +906,10 @@
                 <br>
                 <br>
                 <div class="hero-date">WEDDING DAY</div>
+                <div class="scroll-hint" onclick="document.querySelector('.card').scrollIntoView({behavior:'smooth'})">
+                    <div class="mouse"></div>
+                    <div class="scroll-text" data-ar="اسحب للأسفل" data-en="Scroll down">اسحب للأسفل</div>
+                </div>
             </header>
 
             <!-- Quran & Invitation -->
