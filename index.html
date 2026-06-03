@@ -181,6 +181,30 @@
             object-fit: cover
         }
 
+        #skip-btn {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: var(--transition);
+            letter-spacing: 2px;
+            font-family: var(--font-ar)
+        }
+
+        #skip-btn:hover {
+            background: #fff;
+            color: #1B3A5C;
+            transform: translateY(-4px)
+        }
+
         /* Floating Buttons */
         .float-btn {
             position: fixed;
@@ -213,7 +237,7 @@
 
         #theme-toggle {
             top: 2rem;
-            right: 2rem;
+            left: calc(2rem + 50px + 1rem);
             background: var(--accent-gold)
         }
 
@@ -269,7 +293,21 @@
             opacity: 0;
             transition: opacity 2s;
             min-height: 100vh;
-            background: var(--bg-primary)
+            position: relative;
+            background: transparent;
+        }
+
+        #main-content::before {
+            content: '';
+            position: fixed;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: url('assets/icons/gate_image.png') center/cover no-repeat;
+            filter: blur(8px);
+            opacity: 0.4;
+            z-index: -1;
         }
 
         .overlay-mask {
@@ -626,7 +664,7 @@
 
             #theme-toggle {
                 top: 1.2rem;
-                right: 1.2rem
+                left: calc(1.2rem + 44px + 0.8rem)
             }
 
             #lang-toggle {
@@ -671,6 +709,7 @@
 
     <!-- Video -->
     <div id="video-container">
+        <button id="skip-btn" data-ar="تخطي" data-en="Skip">تخطي</button>
         <video id="opening-video">
             <source src="assets/media/greek_door.mp4" type="video/mp4">
         </video>
@@ -800,12 +839,8 @@
                 <h2><img src="assets/icons/camera.svg" class="card-icon" alt=""><span data-ar="ذكرياتنا"
                         data-en="Our Memories">ذكرياتنا</span></h2>
                 <div class="gallery-grid">
-                    <div class="gallery-item" onclick="openLightbox(this)"><img src="assets/img/memories/1.jpg"
-                            alt="memory 1"></div>
                     <div class="gallery-item" onclick="openLightbox(this)"><img src="assets/img/memories/2.jpg"
                             alt="memory 2"></div>
-                    <div class="gallery-item" onclick="openLightbox(this)"><img src="assets/img/memories/3.jpg"
-                            alt="memory 3"></div>
                     <div class="gallery-item" onclick="openLightbox(this)"><img src="assets/img/memories/4.jpg"
                             alt="memory 4"></div>
                     <div class="gallery-item" onclick="openLightbox(this)"><img src="assets/img/memories/5.jpg"
@@ -856,7 +891,10 @@
 
         // Entry
         startBtn.onclick = () => { splash.style.opacity = '0'; setTimeout(() => { splash.style.display = 'none'; vidBox.style.display = 'block'; vid.play(); music.play() }, 1200) };
-        vid.onended = () => { vidBox.style.opacity = '0'; setTimeout(() => { vidBox.style.display = 'none'; content.style.display = 'block'; setTimeout(() => content.style.opacity = '1', 100) }, 1000) };
+        const showMainContent = () => { vidBox.style.opacity = '0'; setTimeout(() => { vidBox.style.display = 'none'; content.style.display = 'block'; setTimeout(() => content.style.opacity = '1', 100) }, 1000) };
+        vid.onended = showMainContent;
+        const skipBtn = $('skip-btn');
+        if (skipBtn) skipBtn.onclick = () => { vid.pause(); showMainContent(); };
 
         // Audio
         audioBtn.onclick = () => { if (music.paused) { music.play(); bars.classList.remove('paused') } else { music.pause(); bars.classList.add('paused') } };
