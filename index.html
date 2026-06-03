@@ -8,7 +8,7 @@
     <title>دعوة زفاف | اسلام & مى</title>
     <link rel="icon" type="image/png" href="assets/icons/rings.svg">
     <link
-        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa&family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
     <style>
         :root {
@@ -27,6 +27,7 @@
             --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             --font-ar: 'Tajawal', 'Amiri', sans-serif;
             --font-ar-head: 'Amiri', serif;
+            --font-ar-name: 'Aref Ruqaa', 'Amiri', serif;
             --font-en: 'Inter', sans-serif;
             --font-en-head: 'Playfair Display', serif;
             --inv-accent: 43 76% 52%;
@@ -158,7 +159,6 @@
         }
 
         .splash-names {
-            font-family: var(--font-ar-head);
             font-size: clamp(3rem, 10vw, 6rem);
             margin-bottom: 1rem;
             color: var(--accent-gold);
@@ -417,7 +417,7 @@
         }
 
         .hero-names {
-            font-family: var(--font-ar-head);
+            font-family: var(--font-ar-name);
             font-size: clamp(4rem, 14vw, 8rem);
             color: var(--accent-gold);
             line-height: 1.2;
@@ -425,6 +425,10 @@
             position: relative;
             text-shadow: 0 8px 35px rgba(0, 0, 0, 0.25);
             letter-spacing: 0.02em;
+        }
+
+        .arabic-couple-name {
+            font-family: var(--font-ar-name);
         }
 
         .hero-names::before {
@@ -556,6 +560,10 @@
             margin-bottom: 2.5rem;
             display: inline-block;
             position: relative
+        }
+
+        .card h2.arabic-couple-name {
+            font-family: var(--font-ar-name);
         }
 
         html[lang="en"] .card h2 {
@@ -860,7 +868,7 @@
     <!-- Splash -->
     <div id="splash-overlay">
         <div style="text-align:center;animation:fadeIn 2s">
-            <div class="splash-names" data-ar="اسلام & مى" data-en="Eslam & Mai">اسلام & مى</div>
+            <div class="splash-names arabic-couple-name" data-ar="اسلام & مى" data-en="Eslam & Mai">اسلام & مى</div>
             <div class="splash-sub">WEDDING INVITATION</div>
             <button id="start-btn" data-ar="افتح الدعوة" data-en="Open Invitation">افتح الدعوة</button>
         </div>
@@ -904,7 +912,7 @@
             <!-- Hero -->
             <header class="hero">
                 <div class="hero-rings"><img src="assets/icons/rings.svg" alt="rings"></div>
-                <div class="hero-names" data-ar="اسلام & مى" data-en="Eslam & Mai">اسلام & مى</div>
+                <div class="hero-names arabic-couple-name" data-ar="اسلام & مى" data-en="Eslam & Mai">اسلام & مى</div>
                 <br>
                 <br>
                 <div class="hero-date">WEDDING DAY</div>
@@ -928,7 +936,7 @@
                 <p data-ar="تتشرف عائلتا العروسين بدعوتكم لحضور حفل زفاف"
                     data-en="Both families cordially invite you to the wedding celebration of">تتشرف عائلتا العروسين
                     بدعوتكم لحضور حفل زفاف</p>
-                <h2 style="font-size:2.8rem;margin-top:1rem" data-ar="اسلام & مى" data-en="Eslam & Mai">اسلام & مى</h2>
+                <h2 class="arabic-couple-name" style="font-size:2.8rem;margin-top:1rem" data-ar="اسلام & مى" data-en="Eslam & Mai">اسلام & مى</h2>
             </section>
 
             <img class="section-divider" src="assets/icons/last_card.svg" alt="">
