@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="دعوة زفاف اسلام & مى - نتشرف بدعوتكم لحضور حفل زفافنا">
     <title>دعوة زفاف | اسلام & مى</title>
+    <link rel="icon" type="image/png" href="assets/icons/rings.svg">
     <link
         href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
@@ -30,6 +31,7 @@
             --font-en-head: 'Playfair Display', serif;
             --inv-accent: 43 76% 52%;
             --inv-divider: 43 76% 52%;
+            --subtitle-color: #10294d;
         }
 
         [data-theme="dark"] {
@@ -44,6 +46,7 @@
             --accent-gold-glow: rgba(212, 184, 96, 0.12);
             --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.3);
             --shadow-btn: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --subtitle-color: rgba(255, 255, 255, 0.95);
         }
 
         * {
@@ -126,15 +129,54 @@
             justify-content: center;
             align-items: center;
             color: #fff;
-            transition: opacity 1.2s;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('assets/img/bg/gate_image.png') center/cover no-repeat
+            transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1), filter 0.8s;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('assets/img/bg/gate_image.png') center/cover no-repeat;
+            overflow: hidden;
+        }
+
+        #splash-overlay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(201, 168, 76, 0.18), transparent 35%);
+            filter: blur(40px);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        [data-theme="dark"] #splash-overlay {
+            background: linear-gradient(135deg, rgba(8, 18, 60, 0.86), rgba(10, 14, 35, 0.94)), url('assets/img/bg/gate_image.png') center/cover no-repeat;
+            filter: brightness(0.9) contrast(1.05);
+        }
+
+        [data-theme="light"] #splash-overlay {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55)), url('assets/img/bg/gate_image.png') center/cover no-repeat;
+            filter: brightness(1) contrast(1);
         }
 
         .splash-names {
             font-family: var(--font-ar-head);
             font-size: clamp(3rem, 10vw, 6rem);
             margin-bottom: 1rem;
-            text-shadow: 0 8px 30px rgba(0, 0, 0, 0.5)
+            color: var(--accent-gold);
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.02em;
+            text-shadow: 0 12px 45px rgba(0, 0, 0, 0.35);
+        }
+
+        .splash-names::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 220%;
+            height: 140%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.28), transparent 50%);
+            filter: blur(24px);
+            opacity: 0.9;
+            z-index: -1;
         }
 
         .splash-sub {
@@ -142,7 +184,9 @@
             font-size: 1.4rem;
             letter-spacing: 6px;
             margin-bottom: 3rem;
-            opacity: 0.85
+            opacity: 0.95;
+            color: var(--subtitle-color);
+            text-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
         }
 
         #start-btn {
@@ -225,6 +269,21 @@
             transform: scale(1.12)
         }
 
+        .float-btn.active {
+            transform: scale(0.95);
+            filter: brightness(1.2)
+        }
+
+        .float-btn:active {
+            animation: clickPulse 0.5s cubic-bezier(0.4, 0, 0.2, 1)
+        }
+
+        @keyframes clickPulse {
+            0% { transform: scale(1.12); filter: brightness(1.2) }
+            50% { transform: scale(1.15); filter: brightness(1.4) }
+            100% { transform: scale(1.12); filter: brightness(1.2) }
+        }
+
         .float-btn img {
             width: 22px;
             height: 22px;
@@ -244,18 +303,32 @@
         #lang-toggle {
             top: 2rem;
             left: 2rem;
-            background: var(--text-primary);
+            background: #1B3A5C;
             color: #fff;
             font-family: var(--font-en);
             font-size: 0.85rem;
             font-weight: 600;
-            letter-spacing: 1px
+            letter-spacing: 1px;
+            border: 2px solid transparent;
+            transition: var(--transition)
+        }
+
+        #lang-toggle:active {
+            border-color: #fff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3)
         }
 
         #audio-toggle {
             bottom: 2rem;
             left: 2rem;
-            background: var(--text-primary)
+            background: #1B3A5C;
+            border: 2px solid transparent;
+            transition: var(--transition)
+        }
+
+        #audio-toggle:active {
+            border-color: #fff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3)
         }
 
         .music-bars {
@@ -341,9 +414,26 @@
         .hero-names {
             font-family: var(--font-ar-head);
             font-size: clamp(4rem, 14vw, 8rem);
-            color: var(--text-primary);
+            color: var(--accent-gold);
             line-height: 1.2;
-            margin-bottom: 1rem
+            margin-bottom: 1rem;
+            position: relative;
+            text-shadow: 0 8px 35px rgba(0, 0, 0, 0.25);
+            letter-spacing: 0.02em;
+        }
+
+        .hero-names::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 220%;
+            height: 140%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.18), transparent 55%);
+            filter: blur(18px);
+            opacity: 0.8;
+            z-index: -1;
         }
 
         html[lang="en"] .hero-names {
@@ -352,7 +442,7 @@
 
         .hero-date {
             font-size: 1.3rem;
-            color: var(--accent-gold);
+            color: var(--subtitle-color);
             font-family: var(--font-en);
             font-weight: 300;
             letter-spacing: 6px
@@ -746,6 +836,8 @@
             <header class="hero">
                 <div class="hero-rings"><img src="assets/icons/rings.svg" alt="rings"></div>
                 <div class="hero-names" data-ar="اسلام & مى" data-en="Eslam & Mai">اسلام & مى</div>
+                <br>
+                <br>
                 <div class="hero-date">WEDDING DAY</div>
             </header>
 
@@ -896,8 +988,18 @@
         const skipBtn = $('skip-btn');
         if (skipBtn) skipBtn.onclick = () => { vid.pause(); showMainContent(); };
 
+        // Helper for button click animation
+        function triggerClickAnimation(btn) {
+            btn.classList.add('active');
+            setTimeout(() => btn.classList.remove('active'), 500);
+        }
+
         // Audio
-        audioBtn.onclick = () => { if (music.paused) { music.play(); bars.classList.remove('paused') } else { music.pause(); bars.classList.add('paused') } };
+        audioBtn.onclick = () => { 
+            triggerClickAnimation(audioBtn);
+            if (music.paused) { music.play(); bars.classList.remove('paused') } 
+            else { music.pause(); bars.classList.add('paused') } 
+        };
 
         // Theme
         const themeBtn = $('theme-toggle'), themeIcon = $('theme-icon');
@@ -905,7 +1007,15 @@
 
         // Language
         const langBtn = $('lang-toggle'); let isAr = true;
-        langBtn.onclick = () => { isAr = !isAr; const html = document.documentElement; html.lang = isAr ? 'ar' : 'en'; html.dir = isAr ? 'rtl' : 'ltr'; langBtn.textContent = isAr ? 'EN' : 'ع'; document.querySelectorAll('[data-ar]').forEach(el => { el.textContent = isAr ? el.dataset.ar : el.dataset.en }) };
+        langBtn.onclick = () => { 
+            triggerClickAnimation(langBtn);
+            isAr = !isAr; 
+            const html = document.documentElement; 
+            html.lang = isAr ? 'ar' : 'en'; 
+            html.dir = isAr ? 'rtl' : 'ltr'; 
+            langBtn.textContent = isAr ? 'EN' : 'ع'; 
+            document.querySelectorAll('[data-ar]').forEach(el => { el.textContent = isAr ? el.dataset.ar : el.dataset.en }) 
+        };
 
         // Scroll Animation
         const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }) }, { threshold: 0.12 });
