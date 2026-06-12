@@ -459,7 +459,7 @@
 
         .scroll-hint {
             position: absolute;
-            bottom: -2rem;
+            bottom: -1rem;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -936,6 +936,7 @@
                 <p data-ar="تتشرف عائلتا العروسين بدعوتكم لحضور حفل زفاف"
                     data-en="Both families cordially invite you to the wedding celebration of">تتشرف عائلتا العروسين
                     بدعوتكم لحضور حفل زفاف</p>
+                   <p> <img width="50%" src="assets/icons/last_card.svg" alt=""></p> 
                 <h2 class="arabic-couple-name" style="font-size:2.8rem;margin-top:1rem" data-ar="اسلام & مى" data-en="Eslam & Mai">اسلام & مى</h2>
             </section>
 
@@ -949,10 +950,9 @@
                     src="assets/icons/border_corner.svg">
                 <h2 data-ar="تفاصيل الحفل" data-en="Event Details">تفاصيل الحفل</h2>
                 <div class="detail-row"><img src="assets/icons/date.svg" alt="date"><span
-                        data-ar="يوم السبت الموافق 2 يناير 2026" data-en="Saturday, October 24, 2026">يوم السبت
-                        الموافق 24 أكتوبر 2026</span></div>
+                        data-ar="يوم السبت الموافق 9 يناير 2027" data-en="Saturday, January 9, 2027">يوم السبت الموافق 9 يناير 2027 </span></div>
                 <div class="detail-row"><img src="assets/icons/time.svg" alt="time"><span
-                        data-ar="في تمام الساعة السابعة مساءً" data-en="At 7:00 PM">في تمام الساعة السابعة مساءً</span>
+                        data-ar="7:00 PM" data-en="7:00 PM">7:00 PM</span>
                 </div>
                 <div class="detail-row"><img src="assets/icons/loctaion.svg" alt="location"><span
                         data-ar="المكان: قاعة القصر" data-en="Venue: Al-Qasr Hall">المكان: قاعة القصر</span></div>
@@ -1128,7 +1128,7 @@
         document.querySelectorAll('.animate-on-scroll').forEach(c => obs.observe(c));
 
         // Countdown
-        const wDate = new Date('January 2, 2027 19:00:00').getTime();
+        const wDate = new Date('January 9, 2027 19:00:00').getTime();
         function tick() {
             const d = wDate - Date.now(); if (d < 0) { $('countdown').innerHTML = isAr ? 'لقد حان الزفاف!' : 'The big day is here!'; return }
             const days = Math.floor(d / 864e5), hrs = Math.floor(d % 864e5 / 36e5), mins = Math.floor(d % 36e5 / 6e4), secs = Math.floor(d % 6e4 / 1e3);
