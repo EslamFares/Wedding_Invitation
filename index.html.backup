@@ -341,10 +341,6 @@
             transition: var(--transition)
         }
 
-        #audio-toggle .music-bars.paused {
-            opacity: 0.6;
-        }
-
         #audio-toggle:active {
             border-color: #fff;
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.3)
@@ -361,14 +357,12 @@
             width: 4px;
             background: #fff;
             border-radius: 2px;
-            animation: bounce .8s infinite alternate;
-            transition: var(--transition);
+            animation: bounce .8s infinite alternate
         }
 
         .music-bars.paused div {
             animation: none;
-            height: 4px;
-            background: #9CA3AF;
+            height: 4px
         }
 
         @keyframes bounce {
@@ -888,46 +882,40 @@
             }
         }
 
-        /* Tabs */
+        /* Tabs - Cupertino Style */
         .event-tabs {
             display: inline-flex;
             gap: 0;
-            margin: 2rem auto;
-            flex-wrap: nowrap;
+            margin-bottom: 2rem;
             justify-content: center;
-            background: rgba(201, 168, 76, 0.15);
-            padding: 0.2rem;
-            border-radius: 12px;
-            border: 1.5px solid var(--accent-gold);
-            position: relative;
             width: 100%;
-            max-width: 400px;
+            padding: 6px;
+            background: rgba(201, 168, 76, 0.12);
+            border-radius: 50px;
+            position: relative;
         }
 
         .event-tab-btn {
-            padding: 0.8rem 1.5rem;
+            padding: 0.75rem 1.3rem;
             background: transparent;
             color: var(--accent-gold);
             border: none;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             font-family: inherit;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            margin: 0;
-            flex: 1;
-            text-align: center;
-            border-radius: 10px;
+            transition: color 0.3s ease, transform 0.2s ease;
+            border-radius: 44px;
             position: relative;
             z-index: 2;
-            white-space: normal;
-            word-break: break-word;
-            min-width: 0;
+            flex: 1;
+            min-width: 100px;
+            white-space: nowrap;
         }
 
-        .event-tab-btn:hover {
-            color: var(--accent-gold);
-            background: rgba(201, 168, 76, 0.1);
+        .event-tab-btn:hover:not(.active) {
+            color: rgba(201, 168, 76, 0.8);
+            background: rgba(201, 168, 76, 0.08);
         }
 
         .event-tab-btn.active {
@@ -945,19 +933,83 @@
             animation: fadeIn 0.4s;
         }
 
+        .event-tab-content.slide-in-right,
+        .event-tab-content.slide-in-left,
+        .event-tab-content.slide-out-left,
+        .event-tab-content.slide-out-right {
+            display: block !important;
+        }
+
+        .event-tab-content.slide-in-right {
+            animation: slideInRight 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .event-tab-content.slide-in-left {
+            animation: slideInLeft 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .event-tab-content.slide-out-left {
+            animation: slideOutLeft 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .event-tab-content.slide-out-right {
+            animation: slideOutRight 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideOutLeft {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+        }
+
         @media(max-width:768px) {
             .event-tabs {
-                max-width: 100%;
+                padding: 5px;
                 gap: 0;
-                margin-left: 1rem;
-                margin-right: 1rem;
-                padding: 0.3rem;
             }
 
             .event-tab-btn {
-                padding: 0.6rem 0.5rem;
-                font-size: 0.75rem;
-                line-height: 1.2;
+                padding: 0.65rem 0.9rem;
+                font-size: 0.85rem;
+                min-width: 80px;
             }
         }
     </style>
@@ -1055,10 +1107,10 @@
                 <!-- Tabs Navigation -->
                 <div class="event-tabs">
                     <button class="event-tab-btn" onclick="switchEventTab(0)" data-ar="حنة مي"
-                        data-en="Mai's Pre Wedding">حنة مي</button>
-                    <button class="event-tab-btn" onclick="switchEventTab(1)" data-ar="حنة اسلام"
-                        data-en="Eslam's Pre Wedding">حنة اسلام</button>
-                    <button class="event-tab-btn active" onclick="switchEventTab(2)" data-ar="الزفاف"
+                        data-en="Mai ReWedding">حنة مي</button>
+                    <button class="event-tab-btn active" onclick="switchEventTab(1)" data-ar="حنة اسلام"
+                        data-en="Eslam PreWedding">حنة اسلام</button>
+                    <button class="event-tab-btn" onclick="switchEventTab(2)" data-ar="الزفاف"
                         data-en="Wedding">الزفاف</button>
                 </div>
 
@@ -1087,7 +1139,7 @@
                 </div>
 
                 <!-- Tab 2: Eslam PreWedding -->
-                <div class="event-tab-content">
+                <div class="event-tab-content active">
                     <div class="detail-row"><img src="assets/icons/date.svg" alt="date"><span
                             data-ar="يوم الجمعة الموافق 8 يناير 2027" data-en="Friday, January 8, 2027">يوم الجمعة
                             الموافق 8 يناير 2027</span></div>
@@ -1113,7 +1165,7 @@
 
 
                 <!-- Tab 3: Wedding -->
-                <div class="event-tab-content active">
+                <div class="event-tab-content">
                     <div class="detail-row"><img src="assets/icons/date.svg" alt="date"><span
                             data-ar="يوم السبت الموافق 9 يناير 2027" data-en="Saturday, January 9, 2027">يوم السبت
                             الموافق 9 يناير 2027</span></div>
@@ -1329,17 +1381,81 @@
         function openLightbox(el) { const lb = $('lightbox'); $('lightbox-img').src = el.querySelector('img').src; lb.classList.add('active') }
         function closeLightbox() { $('lightbox').classList.remove('active') }
 
-        // Event Tabs
-        function switchEventTab(index) {
+        // Event Tabs with Swipe
+        let currentTabIndex = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let isTabAnimating = false;
+        
+        function switchEventTab(index, direction = 'auto') {
+            if (isTabAnimating || index === currentTabIndex) return;
+            isTabAnimating = true;
+            
             const tabs = document.querySelectorAll('.event-tab-btn');
             const contents = document.querySelectorAll('.event-tab-content');
-
+            
+            // Determine swipe direction if auto
+            if (direction === 'auto') {
+                direction = index > currentTabIndex ? 'right' : 'left';
+            }
+            
+            // Animate out current
+            const outAnimation = direction === 'right' ? 'slide-out-right' : 'slide-out-left';
+            contents[currentTabIndex].classList.remove('active');
+            contents[currentTabIndex].classList.add(outAnimation);
+            
+            // Prepare new content
+            const inAnimation = direction === 'right' ? 'slide-in-right' : 'slide-in-left';
+            contents[index].classList.add(inAnimation, 'active');
             tabs.forEach(tab => tab.classList.remove('active'));
-            contents.forEach(content => content.classList.remove('active'));
-
             tabs[index].classList.add('active');
-            contents[index].classList.add('active');
+            
+            // Wait for animations to complete
+            setTimeout(() => {
+                // Remove animation classes
+                contents[currentTabIndex].classList.remove(outAnimation);
+                contents[currentTabIndex].classList.remove('active');
+                contents[index].classList.remove(inAnimation);
+                
+                // Update index
+                currentTabIndex = index;
+                isTabAnimating = false;
+            }, 500);
         }
+        
+        // Touch swipe handling
+        function handleSwipe() {
+            const swipeDistance = touchStartX - touchEndX;
+            const minSwipeDistance = 50;
+            
+            if (Math.abs(swipeDistance) < minSwipeDistance) return;
+            
+            // Swiped left (show next tab)
+            if (swipeDistance > 0) {
+                const nextIndex = (currentTabIndex + 1) % 3;
+                switchEventTab(nextIndex, 'left');
+            }
+            // Swiped right (show previous tab)
+            else {
+                const prevIndex = (currentTabIndex - 1 + 3) % 3;
+                switchEventTab(prevIndex, 'right');
+            }
+        }
+        
+        // Add touch listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabsContainer = document.querySelector('.event-tabs');
+            if (tabsContainer) {
+                tabsContainer.addEventListener('touchstart', e => {
+                    touchStartX = e.changedTouches[0].screenX;
+                }, false);
+                
+                tabsContainer.addEventListener('touchend', e => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                }, false);
+            }
+        });
 
         // Share
         function shareInvitation() { if (navigator.share) { navigator.share({ title: 'دعوة زفاف اسلام & مى', text: 'يسعدنا دعوتكم لحضور حفل زفافنا', url: window.location.href }) } else { navigator.clipboard.writeText(window.location.href); alert(isAr ? 'تم نسخ الرابط!' : 'Link copied!') } }
