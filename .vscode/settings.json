@@ -13,7 +13,8 @@
         "titleBar.inactiveForeground": "#15202b99",
         "commandCenter.foreground": "#15202b",
         "statusBar.debuggingBackground": "#c05faa",
-        "statusBar.debuggingForeground": "#15202b"
+        "statusBar.debuggingForeground": "#15202b",
+        "statusBar.inactiveBackground": "#c05faa"
     },
     "peacock.color": "#c05faa"
 }
