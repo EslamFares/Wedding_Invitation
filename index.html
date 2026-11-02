@@ -338,47 +338,21 @@
             left: 2rem;
             background: #1B3A5C;
             border: 2px solid transparent;
-            transition: var(--transition)
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.45s ease, visibility 0.45s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease
         }
 
-        #audio-toggle .music-bars.paused {
-            opacity: 0.6;
+        #audio-toggle.is-visible {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto
         }
 
         #audio-toggle:active {
             border-color: #fff;
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.3)
-        }
-
-        .music-bars {
-            display: flex;
-            align-items: flex-end;
-            gap: 4px;
-            height: 22px
-        }
-
-        .music-bars div {
-            width: 4px;
-            background: #fff;
-            border-radius: 2px;
-            animation: bounce .8s infinite alternate;
-            transition: var(--transition);
-        }
-
-        .music-bars.paused div {
-            animation: none;
-            height: 4px;
-            background: #9CA3AF;
-        }
-
-        @keyframes bounce {
-            from {
-                height: 4px
-            }
-
-            to {
-                height: 22px
-            }
         }
 
         /* Main */
@@ -1002,15 +976,10 @@
     <!-- Language Toggle -->
     <button class="float-btn" id="lang-toggle" title="Switch language">EN</button>
 
-    <!-- Audio Toggle -->
-    <div class="float-btn" id="audio-toggle">
-        <div class="music-bars" id="music-bars">
-            <div style="animation-delay:0.1s"></div>
-            <div style="animation-delay:0.3s"></div>
-            <div style="animation-delay:0.2s"></div>
-            <div style="animation-delay:0.4s"></div>
-        </div>
-    </div>
+    <!-- Audio Toggle — shown only after music starts -->
+    <button class="float-btn" id="audio-toggle" type="button" title="Mute music" aria-label="Mute music">
+        <img id="audio-icon" src="assets/icons/speaker.svg" alt="">
+    </button>
 
     <!-- Main Content -->
     <div id="main-content">
@@ -1288,7 +1257,7 @@
         const $ = id => document.getElementById(id);
         const splash = $('splash-overlay'), vidBox = $('video-container'), vid = $('opening-video'),
             content = $('main-content'), music = $('bg-music'), audioBtn = $('audio-toggle'),
-            bars = $('music-bars'), startBtn = $('start-btn'), petals = $('petals-container');
+            audioIcon = $('audio-icon'), startBtn = $('start-btn'), petals = $('petals-container');
         const scrollHint = document.querySelector('.scroll-hint');
 
         // Petals
@@ -1296,7 +1265,7 @@
         setInterval(makePetal, 400);
 
         // Entry
-        startBtn.onclick = () => { splash.style.opacity = '0'; setTimeout(() => { splash.style.display = 'none'; vidBox.style.display = 'block'; vid.play(); music.play() }, 1200) };
+        startBtn.onclick = () => { splash.style.opacity = '0'; setTimeout(() => { splash.style.display = 'none'; vidBox.style.display = 'block'; vid.play(); const started = music.play(); if (started) started.then(() => revealAudioControl()).catch(() => {}) }, 1200) };
         const showMainContent = () => { vidBox.style.opacity = '0'; setTimeout(() => { vidBox.style.display = 'none'; content.style.display = 'block'; setTimeout(() => content.style.opacity = '1', 100) }, 1000) };
         vid.onended = showMainContent;
         const skipBtn = $('skip-btn');
@@ -1318,12 +1287,29 @@
             setTimeout(() => btn.classList.remove('active'), 500);
         }
 
-        // Audio
+        // Audio — button appears once music actually starts
+        let musicStarted = false;
+        function syncAudioIcon() {
+            const playing = !music.paused;
+            audioIcon.src = playing ? 'assets/icons/speaker.svg' :'assets/icons/speaker-muted.svg';
+
+            const label = playing ? 'Mute music' : 'Unmute music';
+            audioBtn.title = label;
+            audioBtn.setAttribute('aria-label', label);
+        }
+        function revealAudioControl() {
+            musicStarted = true;
+            audioBtn.classList.add('is-visible');
+            syncAudioIcon();
+        }
         audioBtn.onclick = () => {
+            if (!musicStarted) return;
             triggerClickAnimation(audioBtn);
-            if (music.paused) { music.play(); bars.classList.remove('paused') }
-            else { music.pause(); bars.classList.add('paused') }
+            if (music.paused) music.play();
+            else music.pause();
         };
+        music.addEventListener('play', syncAudioIcon);
+        music.addEventListener('pause', syncAudioIcon);
 
         // Theme
         const themeBtn = $('theme-toggle'), themeIcon = $('theme-icon');
