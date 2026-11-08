@@ -1030,11 +1030,12 @@
                 <!-- Tabs Navigation -->
                 <div class="event-tabs">
 
-                    <button class="event-tab-btn active" onclick="switchEventTab(0)" data-ar="حنة مي"
+                    <button class="event-tab-btn active" onclick="switchEventTab(0)" data-ar="حنة اسلام"
+                        data-en="Eslam's Henna night">حنة اسلام</button>
+
+                    <button class="event-tab-btn" onclick="switchEventTab(1)" data-ar="حنة مي"
                         data-en="ㅤㅤMai's Henna night">حنة مي</button>
 
-                    <button class="event-tab-btn" onclick="switchEventTab(1)" data-ar="حنة اسلام"
-                        data-en="Eslam's Henna night">حنة اسلام</button>
 
 
                     <!-- <button class="event-tab-btn" onclick="switchEventTab(2)" data-ar="الزفاف"
@@ -1042,32 +1043,10 @@
                 </div>
 
 
-                <!-- Tab 1: Mai ReWedding -->
-                <div class="event-tab-content active">
-                    <div class="detail-row"><img src="assets/icons/date.svg" alt="date"><span
-                            data-ar="يوم الثلاثاء الموافق 5 يناير 2027" data-en="Tuesday, January 5, 2027">يوم الثلاثاء
-                            الموافق 5 يناير 2027</span></div>
-                    <div class="detail-row"><img src="assets/icons/time.svg" alt="time"><span data-ar="07:00 PM"
-                            data-en="07:00 PM">07:00 PM</span>
-                    </div>
-                    <div class="detail-row"><img src="assets/icons/loctaion.svg" alt="location"><span
-                            data-ar="الموقع: شنفاس" data-en="Location: Shinfas">الموقع: شنفاس</span></div>
-                    <br>
-                    <a href="https://maps.app.goo.gl/RgqGs2nfFENihuSX7" class="btn-gold" target="_blank"
-                        rel="noopener noreferrer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            aria-hidden="true">
-                            <path d="M15 3h6v6"></path>
-                            <path d="M10 14 21 3"></path>
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                        </svg>
-                        <span data-ar="الموقع على الخريطة" data-en="Open in Maps">الموقع على الخريطة</span>
-                    </a>
-                </div>
 
-                <!-- Tab 2: Eslam PreWedding -->
-                <div class="event-tab-content">
+
+                <!-- Tab 1: Eslam PreWedding -->
+                <div class="event-tab-content active">
                     <div class="detail-row"><img src="assets/icons/date.svg" alt="date"><span
                             data-ar="يوم الاربعاء الموافق 6 يناير 2027" data-en="Wednesday, January 6, 2027">يوم
                             الاربعاء
@@ -1094,7 +1073,29 @@
                     </a>
                 </div>
 
-
+                <!-- Tab 1: Mai ReWedding -->
+                <div class="event-tab-content">
+                    <div class="detail-row"><img src="assets/icons/date.svg" alt="date"><span
+                            data-ar="يوم الخميس الموافق 7 يناير 2027" data-en="Thursday, January 7, 2027">يوم الخميس
+                            الموافق 7 يناير 2027</span></div>
+                    <div class="detail-row"><img src="assets/icons/time.svg" alt="time"><span data-ar="07:00 PM"
+                            data-en="07:00 PM">07:00 PM</span>
+                    </div>
+                    <div class="detail-row"><img src="assets/icons/loctaion.svg" alt="location"><span
+                            data-ar="الموقع: قاعة الوادي - أجا" data-en="Location: Al-Wadi Hall - Aga">الموقع: قاعة الوادي- أجا</span></div>
+                    <br>
+                    <a href="https://maps.app.goo.gl/pVeh9ipeEtdSgVQB7?g_st=atm" class="btn-gold" target="_blank"
+                        rel="noopener noreferrer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            aria-hidden="true">
+                            <path d="M15 3h6v6"></path>
+                            <path d="M10 14 21 3"></path>
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        </svg>
+                        <span data-ar="الموقع على الخريطة" data-en="Open in Maps">الموقع على الخريطة</span>
+                    </a>
+                </div>
 
 
 
@@ -1124,9 +1125,10 @@
                 </div> -->
             </section>
 
-            <img class="section-divider" src="assets/icons/last_card.svg" alt="">
-
             <!-- Dress Code -->
+
+            <!-- <img class="section-divider" src="assets/icons/last_card.svg" alt=""> -->
+
             <!-- <section class="card animate-on-scroll">
                 <img class="card-corner tl" src="assets/icons/border_corner.svg"><img class="card-corner tr"
                     src="assets/icons/border_corner.svg">
@@ -1265,7 +1267,7 @@
         setInterval(makePetal, 400);
 
         // Entry
-        startBtn.onclick = () => { splash.style.opacity = '0'; setTimeout(() => { splash.style.display = 'none'; vidBox.style.display = 'block'; vid.play(); const started = music.play(); if (started) started.then(() => revealAudioControl()).catch(() => {}) }, 1200) };
+        startBtn.onclick = () => { splash.style.opacity = '0'; setTimeout(() => { splash.style.display = 'none'; vidBox.style.display = 'block'; vid.play(); const started = music.play(); if (started) started.then(() => revealAudioControl()).catch(() => { }) }, 1200) };
         const showMainContent = () => { vidBox.style.opacity = '0'; setTimeout(() => { vidBox.style.display = 'none'; content.style.display = 'block'; setTimeout(() => content.style.opacity = '1', 100) }, 1000) };
         vid.onended = showMainContent;
         const skipBtn = $('skip-btn');
@@ -1291,7 +1293,7 @@
         let musicStarted = false;
         function syncAudioIcon() {
             const playing = !music.paused;
-            audioIcon.src = playing ? 'assets/icons/speaker.svg' :'assets/icons/speaker-muted.svg';
+            audioIcon.src = playing ? 'assets/icons/speaker.svg' : 'assets/icons/speaker-muted.svg';
 
             const label = playing ? 'Mute music' : 'Unmute music';
             audioBtn.title = label;
