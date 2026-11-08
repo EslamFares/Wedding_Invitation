@@ -670,6 +670,15 @@
             flex-wrap: wrap
         }
 
+        .countdown-message {
+            width: 100%;
+            grid-column: 1 / -1;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            padding: 1.5rem 0;
+        }
+
         .time-box {
             background: var(--text-primary);
             color: var(--bg-primary);
@@ -1178,7 +1187,7 @@
                     src="assets/icons/border_corner.svg">
                 <img class="card-corner bl" src="assets/icons/border_corner.svg"><img class="card-corner br"
                     src="assets/icons/border_corner.svg">
-                <h2 data-ar="العد التنازلي" data-en="Countdown">العد التنازلي</h2>
+                <h2 id="countdown-title" data-ar="العد التنازلي" data-en="Countdown">العد التنازلي</h2>
                 <div class="countdown" id="countdown"></div>
             </section>
 
@@ -1347,7 +1356,17 @@
         // Countdown
         const wDate = new Date('January 7, 2027 19:00:00').getTime();
         function tick() {
-            const d = wDate - Date.now(); if (d < 0) { $('countdown').innerHTML = isAr ? 'لقد حان الزفاف!' : 'The big day is here!'; return }
+            const diff = wDate - Date.now();
+            const title = $('countdown-title');
+            const HOLD = 2 * 36e5; // show the message for 2 hours after the wedding time
+            const setTitle = (ar, en) => { title.dataset.ar = ar; title.dataset.en = en; title.textContent = isAr ? ar : en };
+            if (diff <= 0 && -diff < HOLD) {
+                setTitle('العد التنازلي', 'Countdown');
+                $('countdown').innerHTML = `<div class="countdown-message">${isAr ? 'لقد حان الزفاف!' : 'The big day is here!'}</div>`;
+                return
+            }
+            if (diff > 0) setTitle('العد التنازلي', 'Countdown'); else setTitle('بدأ منذ', 'Started since');
+            const d = Math.abs(diff);
             const days = Math.floor(d / 864e5), hrs = Math.floor(d % 864e5 / 36e5), mins = Math.floor(d % 36e5 / 6e4), secs = Math.floor(d % 6e4 / 1e3);
             $('countdown').innerHTML = `<div class="time-box"><span>${days}</span><label>${isAr ? 'يوم' : 'Days'}</label></div><div class="time-box"><span>${hrs}</span><label>${isAr ? 'ساعة' : 'Hrs'}</label></div><div class="time-box"><span>${mins}</span><label>${isAr ? 'دقيقة' : 'Min'}</label></div><div class="time-box"><span>${secs}</span><label>${isAr ? 'ثانية' : 'Sec'}</label></div>`
         }
